@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Повышение звания</title>
+    <style>
+        body {
+            background: #121212;
+            color: white;
+            font-family: Arial;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px #0008;
+            max-width: 500px;
+            width: 100%;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            margin: 20px 0;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:hover { background: #45a049; transform: scale(1.02); }
+        button:active { transform: scale(0.98); }
+        button:disabled { 
+            background: #555; 
+            cursor: not-allowed;
+        }
+        .stats p { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Система повышения звания</h1>
+        
+        <button id="btn">Повысить звание (100 очков)</button>
+        
+        <div class="stats">
+            <p>Текущее звание: <b id="rank">Новичок</b></p>
+        </div>
+    </div>
+
+    <script>
+        const ranks = ["Новичок", "Опытный", "Специалист", "Эксперт", "Мастер", "Гуру"];
+        const costs = [100, 200, 400, 800, 1600];
+        let currentRank = 0;
+
+        const btn = document.getElementById('btn');
+        const rankElement = document.getElementById('rank');
+
+        function updateUI() {
+            rankElement.textContent = ranks[currentRank];
+            
+            if (currentRank < ranks.length - 1) {
+                btn.textContent = `Повысить звание (${costs[currentRank]} очков)`;
+            } else {
+                btn.textContent = "Максимальное звание достигнуто!";
+                btn.disabled = true;
+            }
+        }
+
+        btn.addEventListener('click', () => {
+            if (currentRank < ranks.length - 1) {
+                currentRank++;
+                updateUI();
+            }
+        });
+
+        updateUI();
+    </script>
+</body>
+</html>
